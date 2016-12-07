@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" >
+<head th:include="fragments/head :: head">
+
+</head>
+<body>
+<div th:include="fragments/header :: header"></div>
+<div class="container">
+
+    <div class="jumbotron ">
+        <h2 class="text-center">Welcome To Totally Sound Entertainment's 2nd Annual Bridal Show</h2>
+        <div class="row">
+        <div class="checkin">
+
+            <h3 class="text-center">Pre-Registered?</h3>
+            <form action="#" role="form" th:action="@{/checkin}" th:object="${bride}" method="post">
+                <div class="row">
+                <label>Name:</label>
+                    <input placeholder="Ann Smith" type="text" name="name" th:field="*{name}"/>
+                <br/>
+                    <p class="text-center">Or</p>
+                <label>Email:</label>
+                <input placeholder="AnnSmith@gmail.com" type="text" th:field="*{email}"/>
+                </div>
+                <div class="row" id=" checkinBtn" >
+                <button class="btn-primary btn-circle btn-block center text-center" type="submit" value="Submit">Check-in</button>
+                    </div>
+            </form>
+        </div>
+
+        <div class="register">
+            <h3 class="text-center">Walk-in?</h3>
+            <form action="/create" role="form" th:action="@{/create}" th:object="${bride}" method="post">
+                <label>Name:</label>
+                <input placeholder="Ann Smith"  name="name" th:field="*{name}" type="text"/><br/>
+                <label>Email:</label>
+                <input placeholder="AnnSmith@gmail.com" name="email" th:field="*{email}" type="text"/><br/>
+                <label>Wedding Date</label>
+                <div class="input-group date" id="weddingDate" data-provide="datepicker">
+                    <input type="text" class="form-control" name="weddingDate" th:field="*{weddingDate}" />
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+                    <br/><br/><br/>
+                <button class="btn-info btn-circle btn-block text-center" type="submit" value="search">Register</button>
+            </form>
+        </div>
+</div>
+
+    </div>
+
+
+<script>
+    $('.register .input-group.date').datepicker({
+            format: 'DD, MM dd, yyyy'
+    })
+</script>
+
+</div>
+<div lang="en" th:replace="fragments/footer :: footer"> </div>
+</body>
+</html>
