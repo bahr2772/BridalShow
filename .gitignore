@@ -6,3 +6,7 @@ system.properties
 Procfile
 app.json
 BrideLogin.iml
+.classpath
+.project
+BrideLogin.eml
+brideLogin.userlibraries
