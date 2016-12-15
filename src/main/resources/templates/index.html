@@ -8,55 +8,90 @@
 <div th:include="fragments/header :: header"></div>
 <div class="container">
 
-    <div class="jumbotron ">
+    <div class="jumbotron" style="margin-top: 75px;">
         <h2 class="text-center">Welcome To Totally Sound Entertainment's 2nd Annual Bridal Show</h2>
         <div class="row">
-        <div class="checkin">
+        <div class="col-md-5">
+
+            <div class="alert alert-danger" role="alert" id="userNotFound" th:if="${error} == 'notFound'">
+                <strong>Oh snap!</strong> Your are not pre-registered. Please Register.
+            </div>
 
             <h3 class="text-center">Pre-Registered?</h3>
             <form action="#" role="form" th:action="@{/checkin}" th:object="${bride}" method="post">
-                <div class="row">
                 <label>Name:</label>
-                    <input placeholder="Ann Smith" type="text" name="name" th:field="*{name}"/>
-                <br/>
-                    <p class="text-center">Or</p>
-                <label>Email:</label>
-                <input placeholder="AnnSmith@gmail.com" type="text" th:field="*{email}"/>
+                <div class="input-group name" id="name">
+                    <input placeholder="Ann Smith"  name="name" class="form-control" th:field="*{name}" type="text"/><br/>
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </div>
                 </div>
-                <div class="row" id=" checkinBtn" >
-                <button class="btn-primary btn-circle btn-block center text-center" type="submit" value="Submit">Check-in</button>
+                <h4 class="text-center">OR</h4>
+                <label>Email:</label>
+                <div class="input-group email" id="email">
+                    <input placeholder="AnnSmith@gmail.com" class="form-control" name="email" th:field="*{email}" type="email"/><br/>
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                    </div>
+                </div>
+                <div class="row" id="" >
+                    <br/>
+                    <button type="submit" value="submit" class="btn btn-info  btn-block">Check-in</button>
                     </div>
             </form>
         </div>
 
-        <div class="register">
+            <div class="col-md-5 col-md-offset-2  ">
             <h3 class="text-center">Walk-in?</h3>
             <form action="/create" role="form" th:action="@{/create}" th:object="${bride}" method="post">
                 <label>Name:</label>
-                <input placeholder="Ann Smith"  name="name" th:field="*{name}" type="text"/><br/>
+                <div class="input-group name" id="name">
+                    <input placeholder="Ann Smith"  name="name" class="form-control" th:field="*{name}" type="text" required="required"/><br/>
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </div>
+                </div>
                 <label>Email:</label>
-                <input placeholder="AnnSmith@gmail.com" name="email" th:field="*{email}" type="text"/><br/>
+                <div class="input-group email" id="email">
+                    <input placeholder="AnnSmith@gmail.com" class="form-control" name="email" th:field="*{email}" type="email" required="required"/><br/>
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                    </div>
+                </div>
                 <label>Wedding Date</label>
                 <div class="input-group date" id="weddingDate" data-provide="datepicker">
-                    <input type="text" class="form-control" name="weddingDate" th:field="*{weddingDate}" />
+                    <input type="text" class="form-control" name="weddingDate" placeholder="Saturday, December 31st, 2016" th:field="*{weddingDate}" required="required" />
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
                 </div>
-                    <br/><br/><br/>
-                <button class="btn-info btn-circle btn-block text-center" type="submit" value="search">Register</button>
+                <label>Phone Number</label>
+                <div class="input-group phone" >
+                    <input type="tel" class="form-control" name="phone" id="phone"  placeholder="(573) 555-7748" th:field="*{phoneNumber}" required="required" />
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-phone"></span>
+                    </div>
+                </div>
+                <br/>
+                <span id="valid-msg" class="hide alert alert-sucess">✓ Valid</span>
+                <span id="error-msg" class="hide alert alert-danger">Invalid number</span>
+                    <br/>
+                 <button type="submit" value="search" class="btn btn-info  btn-block">Register</button>
+
             </form>
         </div>
 </div>
 
     </div>
 
+    <script>
+        $('#phone').mask('(000) 000-0000');
 
-<script>
-    $('.register .input-group.date').datepicker({
-            format: 'DD, MM dd, yyyy'
-    })
-</script>
+        $('#userNotFound').fadeIn().delay(10000).fadeOut();
+
+    </script>
+
+
 
 </div>
 <div lang="en" th:replace="fragments/footer :: footer"> </div>

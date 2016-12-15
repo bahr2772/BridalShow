@@ -36,24 +36,35 @@ public class HomeController {
 
     @RequestMapping("/find-by-email")
     public String getByEmail(String email, Model model){
-        model.addAttribute("brides", brideDao.findByEmailEquals(email));
-        System.out.print(String.valueOf(brideDao.findByEmailEquals(email).getId()));
-        return "result";
+        try {
+            model.addAttribute("brides", brideDao.findByEmailEquals(email));
+            System.out.print(String.valueOf(brideDao.findByEmailEquals(email).getId()));
+            return "result";
+        } catch (NullPointerException e){
+
+        }
+            model.addAttribute("error", "notFound");
+            return "index";
     }
 
     @RequestMapping("/checkin")
     public String getByNameAndEmail(String name, String email, Model model) {
         Bride bride = brideDao.findByNameEqualsIgnoreCaseOrEmailEqualsIgnoreCase(name, email);
-
+    if(bride != null) {
         if (bride.isCheckedIn()) {
             model.addAttribute("message", "You have already been checked-in. If this is an error please see a staff member.");
-    } else {
-        bride.setCheckedIn(true);
+        } else {
+            bride.setCheckedIn(true);
             brideDao.save(bride);
             model.addAttribute("brides", bride);
-    }
+        }
 
         return "result";
+    } else {
+
+        model.addAttribute("error", "notFound");
+        return brideSearchForm(model);
+        }
     }
 
 

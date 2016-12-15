@@ -29,9 +29,11 @@ public class Bride {
     @NotNull
     private String weddingDate;
 
+    private String phoneNumber;
+
     private boolean checkedIn = false;
 
-
+    private String howDidYouHear;
 
     public Bride(){ }
 
@@ -71,11 +73,24 @@ public class Bride {
 
     public void setId(long id) { this.id = id; }
 
+    public String getPhoneNumber() { return phoneNumber; }
+
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+
+    public String getHowDidYouHear() { return howDidYouHear; }
+
+    public void setHowDidYouHear(String howDidYouHear) { this.howDidYouHear = howDidYouHear; }
+
     @Override
-    public String toString(){
-        return "Bride: Name: " + name + ", Email: " + email + ", Wedding Date: " ;
+    public String toString() {
+        return "Bride{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", weddingDate='" + weddingDate + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", checkedIn=" + checkedIn +
+                ", howDidYouHear='" + howDidYouHear + '\'' +
+                '}';
     }
-
-
-
 }
