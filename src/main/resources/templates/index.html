@@ -59,8 +59,8 @@
                     </div>
                 </div>
                 <label>Wedding Date</label>
-                <div class="input-group date" id="weddingDate" data-provide="datepicker">
-                    <input type="text" class="form-control" name="weddingDate" placeholder="Saturday, December 31st, 2016" th:field="*{weddingDate}" required="required" />
+                <div class="input-group date" >
+                    <input type="text" class="form-control" name="weddingDate"  id="weddingDate"  placeholder="Saturday, December 31, 2016" th:field="*{weddingDate}" required="required" />
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -89,6 +89,13 @@
 
         $('#userNotFound').fadeIn().delay(10000).fadeOut();
 
+        $('#weddingDate').datepicker({
+            format: 'DD, MM dd, yyyy',
+            todayHighlight: true,
+            autoclose: true,
+            todayBtn: true,
+            clearBtn: true
+        });
     </script>
 
 
