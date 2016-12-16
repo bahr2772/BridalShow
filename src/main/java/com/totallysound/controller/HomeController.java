@@ -59,7 +59,7 @@ public class HomeController {
 
         }
             model.addAttribute("error", "notFound");
-            return "index";
+            return brideSearchForm(model);
     }
 
     @RequestMapping("/checkin")
