@@ -1,4 +1,27 @@
 <footer th:fragment="foot" class="navbar navbar-fixed-bottom footer" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    &copy; 2017 Totally Sound Entertainment
+
+    <script>
+        $('#phone').mask('(000) 000-0000');
+
+        $('#userNotFound').fadeIn().delay(10000).fadeOut();
+        $('#userFound').fadeIn().delay(10000).fadeOut();
+        $('#weddingDate').datepicker({
+            format: 'DD, MM dd, yyyy',
+            todayHighlight: true,
+            autoclose: true,
+            todayBtn: true,
+            clearBtn: true
+        });
+
+        function showfield(name){
+            if(name=='Other')document.getElementById('div1').style.display="block";
+            else document.getElementById('div1').style.display="none";
+        }
+
+        function hidefield() {
+            document.getElementById('div1').style.display='none';
+        }
+
+    </script>
 </footer>

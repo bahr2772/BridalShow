@@ -1,14 +1,13 @@
 package com.totallysound.controller;
 
-import com.totallysound.repositories.BrideDao;
 import com.totallysound.entities.Bride;
+import com.totallysound.repositories.BrideDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
@@ -24,14 +23,18 @@ public class HomeController {
 
 
     @RequestMapping("/create")
-    public String create(String email, String name, String weddingDate, Model model){
+    public String create(String email, String name, String weddingDate, String phoneNumber, String howDidYouHear, Model model){
             Bride bride = new Bride(email, name);
             bride.setEmail(email);
             bride.setName(name);
             bride.setWeddingDate(weddingDate);
+            bride.setPhoneNumber(phoneNumber);
+            bride.setHowDidYouHear(howDidYouHear);
+            bride.setCheckedIn(true);
             brideDao.save(bride);
-            model.addAttribute("brides", brideDao.findOne(bride.getId()));
-        return "result";
+            model.addAttribute("bride", brideDao.findOne(bride.getId()));
+            model.addAttribute("message", "success");
+        return brideSearchForm(model);
     }
 
     @RequestMapping("/find-by-email")
@@ -50,20 +53,22 @@ public class HomeController {
     @RequestMapping("/checkin")
     public String getByNameAndEmail(String name, String email, Model model) {
         Bride bride = brideDao.findByNameEqualsIgnoreCaseOrEmailEqualsIgnoreCase(name, email);
-    if(bride != null) {
-        if (bride.isCheckedIn()) {
-            model.addAttribute("message", "You have already been checked-in. If this is an error please see a staff member.");
-        } else {
-            bride.setCheckedIn(true);
-            brideDao.save(bride);
-            model.addAttribute("brides", bride);
-        }
 
-        return "result";
-    } else {
-
-        model.addAttribute("error", "notFound");
-        return brideSearchForm(model);
+        if(bride != null) {
+            if (bride.isCheckedIn()) {
+                model.addAttribute("message", "alreadyCheckedin");
+                model.addAttribute("name", bride.getName());
+                return brideSearchForm(model);
+            } else {
+                bride.setCheckedIn(true);
+                brideDao.save(bride);
+                model.addAttribute("bride", bride);
+                model.addAttribute("message","success");
+                return brideSearchForm(model);
+            }
+        }else {
+            model.addAttribute("message", "notFound");
+            return brideSearchForm(model);
         }
     }
 
@@ -72,7 +77,7 @@ public class HomeController {
     public String getByName(String name, String email, Model model){
             System.out.println(name);
             System.out.println(email);
-            model.addAttribute("brides", brideDao.findByNameContainingIgnoreCase(name));
+            model.addAttribute("bride", brideDao.findByNameContainingIgnoreCase(name));
             model.addAttribute("message", "Thank you, You have been checked in. Please enjoy the day. This page will be redirected in 5 seconds.");
         return  "result";
     }
