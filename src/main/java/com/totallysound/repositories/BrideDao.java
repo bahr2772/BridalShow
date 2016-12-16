@@ -2,7 +2,6 @@ package com.totallysound.repositories;
 
 import com.totallysound.entities.Bride;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

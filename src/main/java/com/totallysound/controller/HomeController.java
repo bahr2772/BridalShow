@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class HomeController {
 
@@ -23,18 +25,28 @@ public class HomeController {
 
 
     @RequestMapping("/create")
-    public String create(String email, String name, String weddingDate, String phoneNumber, String howDidYouHear, Model model){
-            Bride bride = new Bride(email, name);
-            bride.setEmail(email);
-            bride.setName(name);
-            bride.setWeddingDate(weddingDate);
-            bride.setPhoneNumber(phoneNumber);
-            bride.setHowDidYouHear(howDidYouHear);
-            bride.setCheckedIn(true);
-            brideDao.save(bride);
-            model.addAttribute("bride", brideDao.findOne(bride.getId()));
-            model.addAttribute("message", "success");
-        return brideSearchForm(model);
+    public String create(String email, String name, String weddingDate, String phoneNumber, String howDidYouHear, Model model) {
+
+            List<Bride> brideList = brideDao.findByNameContainingIgnoreCase(name);
+            List<Bride> brideListEmail = (brideDao.findByEmailEqualsIgnoreCase(email));
+
+
+            if (brideList.isEmpty() && brideListEmail.isEmpty()) {
+                Bride bride = new Bride();
+                bride.setEmail(email);
+                bride.setName(name);
+                bride.setWeddingDate(weddingDate);
+                bride.setPhoneNumber(phoneNumber);
+                bride.setHowDidYouHear(howDidYouHear);
+                bride.setCheckedIn(true);
+                brideDao.save(bride);
+                model.addAttribute("bride", brideDao.findOne(bride.getId()));
+                model.addAttribute("message", "success");
+                return brideSearchForm(model);
+            } else {
+                model.addAttribute("message", "userFound");
+                return brideSearchForm(model);
+            }
     }
 
     @RequestMapping("/find-by-email")
@@ -63,6 +75,7 @@ public class HomeController {
                 bride.setCheckedIn(true);
                 brideDao.save(bride);
                 model.addAttribute("bride", bride);
+                model.addAttribute("name", bride.getName());
                 model.addAttribute("message","success");
                 return brideSearchForm(model);
             }
