@@ -1,0 +1,23 @@
+<messages th:fragment="messages" class="navbar navbar-fixed-bottom footer" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div class="alert alert-danger text-center" style="font-size: 20px;" role="alert" id="userNotFound" th:if="${message} == 'notFound'">
+    <h2 th:text="#{user.error}"/>
+    <p th:text="#{user.notRegistered}"/>
+    <text th:text="#{user.error.seeStaff}"/>
+</div>
+
+<div class="alert alert-danger text-center" style="font-size: 20px;" role="alert" id="userNotFound" th:if="${message} == 'userFound'">
+    <strong>Oh snap!</strong> Your are already registed. Please check in.
+</div>
+
+<div class="alert alert-success text-center" style="font-size: 20px;" role="alert" id="userFound" th:if="${message} == 'success'">
+    <p th:text="#{user.success}+ ${name}+ ',' + #{user.registered}"/>
+</div>
+
+<div class="alert alert-warning text-center" style="font-size: 20px;" role="alert" id="userFound" th:if="${message} == 'alreadyCheckedin'">
+    <h2 th:text="#{user.warn}"/>
+    <p th:text="${name}+ ', ' + #{user.alreadyCheckIn}"/>
+    <text th:text="${email} + #{user.error.seeStaff}"/>
+</div>
+
+</messages>

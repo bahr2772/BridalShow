@@ -8,45 +8,14 @@
 <div th:include="fragments/header :: header"></div>
 <div class="container">
     <div class="jumbotron index">
-        <h2 class="text-center">Welcome To Totally Sound Entertainment's 2nd Annual Bridal Show</h2>
+        <h2 class="text-center" th:text="#{title}"/>
 
-        <div class="alert alert-danger text-center" role="alert" id="userNotFound" th:if="${message} == 'notFound'">
-            <strong>Oh snap!</strong> Your are not pre-registered. Please Register.
-        </div>
-        <div class="alert alert-danger text-center" role="alert" id="userNotFound" th:if="${message} == 'userFound'">
-            <strong>Oh snap!</strong> Your are already registed. Please check in.
-        </div>
-        <div class="alert alert-success text-center" role="alert" id="userFound" th:if="${message} == 'success'">
-            <strong>Awesome Sauce!</strong> <h5 th:text="${name}"></h5> You are checked in, enjoy.
-        </div>
-        <div class="alert alert-warning text-center" role="alert" id="userFound" th:if="${message} == 'alreadyCheckedin'">
-            <strong>Hmm...</strong> Seems like you are already checked in. Please see a staff member if this is an error.
-        </div>
-
+        <div th:include="fragments/messages :: messages"></div>
 
         <div class="row">
             <div class="col-md-5 checkin">
-                <h3 class="text-center">Pre-Registered?</h3>
-                <form action="#" role="form" th:action="@{/checkin}" th:object="${bride}" method="post">
-                    <label>Name</label>
-                    <div class="input-group name" id="name">
-                        <input placeholder="Ann Smith"  name="name" class="form-control" th:field="*{name}" type="text"/><br/>
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </div>
-                    </div>
-                    <br/>
-                    <h4 class="text-center">OR</h4>
-                    <label>Email</label>
-                    <div class="input-group email" id="email">
-                        <input placeholder="AnnSmith@gmail.com" class="form-control" name="email" th:field="*{email}" type="email"/><br/>
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                        </div>
-                    </div>
-                    <br/>
-                    <button type="submit" value="submit" class="btn btn-info btn-block">Check-in</button>
-                </form>
+                <h3 class="text-center" th:text="#{title.preregister}"/>
+                <div lang="en" th:replace="fragments/forms :: checkinForm"> </div>
             </div>
 
             <div class="col-md-1 spacer">
@@ -56,69 +25,11 @@
             </div>
 
             <div class="walkin col-md-5 col-md-offset-1">
-                <h3 class="text-center">Walk-in?</h3>
-                <form action="#" role="form" th:action="@{/create}" th:object="${bride}" method="post">
-                    <label>Name</label>
-                    <div class="input-group name" id="name">
-                        <input placeholder="Ann Smith"  name="name" class="form-control" th:field="*{name}" type="text" required="required"/><br/>
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </div>
-                    </div>
-                    <label>Email</label>
-                    <div class="input-group email" id="email">
-                        <input placeholder="AnnSmith@gmail.com" class="form-control" name="email" th:field="*{email}" type="email" required="required"/><br/>
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                        </div>
-                    </div>
-                    <label>Wedding Date</label>
-                    <div class="input-group date" >
-                        <input type="text" class="form-control" name="weddingDate"  id="weddingDate"  placeholder="Saturday, December 31, 2016" th:field="*{weddingDate}" required="required" />
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-th"></span>
-                        </div>
-                    </div>
-                    <label>Phone Number</label>
-                    <div class="input-group phone" >
-                        <input type="tel" class="form-control" name="phone" id="phone"  placeholder="(573) 555-7748" th:field="*{phoneNumber}" required="required" />
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-phone"></span>
-                        </div>
-                    </div>
-                    <label>How did you hear about us</label>
-                    <div class="input-group">
-                        <select id="howDidYouHearAboutUs" name="howDidYouHear" th:field="*{howDidYouHear}" class="selectpicker form-control" data-live-search="true" title="How did you hear about us?"
-                                onchange="showfield(this.options[this.selectedIndex].value)">
-
-                            <option value="Facebook/Twitter/Social Media">Facebook/Twitter/Social Media</option>
-                            <option value="Friend of Family">Friend or Family</option>
-                            <option value="Newspaper">Newspaper</option>
-                            <option value="Wedding Vendor">Wedding Vendor</option>
-                            <option value="Radio">Radio</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <div id="div1">
-                            <input type="text" class="form-control" name="howDidYouHear"  th:field="*{howDidYouHear}"  />
-                        </div>
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-bullhorn"></span>
-                        </div>
-                    </div>
-                    <br/>
-                    <br/>
-                    <button type="submit" value="search" class="btn btn-info  btn-block">Register</button>
-
-                </form>
+                <h3 class="text-center" th:text="#{title.walkin}"/>
+                <div lang="en" th:replace="fragments/forms :: registerForm"> </div>
             </div>
         </div>
-
     </div>
-
-
-
-
-
 </div>
 <div lang="en" th:replace="fragments/footer :: footer"> </div>
 </body>

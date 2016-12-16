@@ -40,7 +40,8 @@ public class HomeController {
                 bride.setHowDidYouHear(howDidYouHear);
                 bride.setCheckedIn(true);
                 brideDao.save(bride);
-                model.addAttribute("bride", brideDao.findOne(bride.getId()));
+                model.addAttribute("bride", bride);
+                model.addAttribute("email", bride.getEmail());
                 model.addAttribute("message", "success");
                 return brideSearchForm(model);
             } else {
@@ -70,11 +71,14 @@ public class HomeController {
             if (bride.isCheckedIn()) {
                 model.addAttribute("message", "alreadyCheckedin");
                 model.addAttribute("name", bride.getName());
+                model.addAttribute("email", bride.getEmail());
+                model.addAttribute("bride", bride);
                 return brideSearchForm(model);
             } else {
                 bride.setCheckedIn(true);
                 brideDao.save(bride);
                 model.addAttribute("bride", bride);
+                model.addAttribute("email", bride.getEmail());
                 model.addAttribute("name", bride.getName());
                 model.addAttribute("message","success");
                 return brideSearchForm(model);
