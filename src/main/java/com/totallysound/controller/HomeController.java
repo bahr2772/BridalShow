@@ -27,11 +27,10 @@ public class HomeController {
     @RequestMapping("/create")
     public String create(String email, String name, String weddingDate, String phoneNumber, String howDidYouHear, String numberOfGuest, Model model) {
 
-            List<Bride> brideList = brideDao.findByNameContainingIgnoreCase(name);
             List<Bride> brideListEmail = (brideDao.findByEmailEqualsIgnoreCase(email));
 
 
-            if (brideList.isEmpty() && brideListEmail.isEmpty()) {
+            if (brideListEmail.isEmpty()) {
                 Bride bride = new Bride();
                 bride.setEmail(email);
                 bride.setName(name);
@@ -46,7 +45,14 @@ public class HomeController {
                 model.addAttribute("message", "success");
                 return brideSearchForm(model);
             } else {
+                if (brideListEmail.get(0).isCheckedIn()) {
+                    model.addAttribute("message", "alreadyCheckedin");
+                    model.addAttribute("name", brideListEmail.get(0).getName());
+                    model.addAttribute("email", brideListEmail.get(0).getEmail());
+                }
+                else
                 model.addAttribute("message", "userFound");
+
                 return brideSearchForm(model);
             }
     }

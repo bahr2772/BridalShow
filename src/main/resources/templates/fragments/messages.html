@@ -15,9 +15,9 @@
 </div>
 
 <div class="alert alert-warning text-center" style="font-size: 20px;" role="alert" id="userFound" th:if="${message} == 'alreadyCheckedin'">
-    <h2 th:text="#{user.warn}"/>
-    <p th:text="${name}+ ', ' + #{user.alreadyCheckIn}"/>
-    <text th:text="${email} + #{user.error.seeStaff}"/>
+    <h2 th:text="#{user.warn} "/>
+    <p th:text="${name} + ', ' + #{user.alreadyCheckIn}"/>
+    <text th:text="${email} + ' ' + #{user.error.seeStaff}"/>
 </div>
 
 </messages>
