@@ -1,20 +1,19 @@
 <!-- ########################################            Check-in Form         ################################################################################# -->
 
 <form action="#" role="form" th:action="@{/checkin}" th:object="${bride}" method="post" th:fragment="checkinForm" xmlns:th="http://www.w3.org/1999/xhtml">
-    <label th:text="#{label.name}"/>
-    <div class="input-group name" id="name">
-        <input th:placeholder="#{placeholder.name}" name="name" class="form-control" th:field="*{name}" type="text"/><br/>
-        <div class="input-group-addon">
-            <span class="glyphicon glyphicon-user"></span>
-        </div>
-    </div>
-    <br/>
-    <h4 class="text-center">OR</h4>
     <label th:text="#{label.email}"/>
     <div class="input-group email" id="email">
         <input th:placeholder="#{placeholder.email}" class="form-control" name="email" th:field="*{email}" type="email"/><br/>
         <div class="input-group-addon">
             <span class="glyphicon glyphicon-envelope"></span>
+        </div>
+    </div>
+
+    <label th:text="#{label.numberOfGuest}"/>
+    <div class="input-group numberOfGuest" id="numberOfGuest">
+        <input name="guest" class="form-control" th:field="*{numberOfGuest}" type="number"/><br/>
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
         </div>
     </div>
     <br/>
@@ -75,6 +74,14 @@
         </div>
         <div class="input-group-addon">
             <span class="glyphicon glyphicon-bullhorn"></span>
+        </div>
+    </div>
+
+    <label th:text="#{label.numberOfGuest}"/>
+    <div class="input-group numberOfGuest" id="numberOfGuest">
+        <input name="guest" class="form-control" th:field="*{numberOfGuest}" type="number"/><br/>
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
         </div>
     </div>
     <br/>

@@ -11,7 +11,7 @@
 </div>
 
 <div class="alert alert-success text-center" style="font-size: 20px;" role="alert" id="userFound" th:if="${message} == 'success'">
-    <p th:text="#{user.success}+ ${name}+ ',' + #{user.registered}"/>
+    <h2 th:text="#{user.success}"/><p th:text="${name}+ ',' + #{user.registered}"/>
 </div>
 
 <div class="alert alert-warning text-center" style="font-size: 20px;" role="alert" id="userFound" th:if="${message} == 'alreadyCheckedin'">

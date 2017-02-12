@@ -1,13 +1,7 @@
 package com.totallysound.entities;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
-import java.util.Date;
-
-import static javax.print.attribute.standard.MediaPrintableArea.MM;
 
 /**
  * Created by bahr2772 on 12/5/16.
@@ -34,6 +28,8 @@ public class Bride {
     private boolean checkedIn = false;
 
     private String howDidYouHear;
+
+    private String numberOfGuest;
 
     public Bride(){ }
 
@@ -81,6 +77,14 @@ public class Bride {
 
     public void setHowDidYouHear(String howDidYouHear) { this.howDidYouHear = howDidYouHear; }
 
+    public String getNumberOfGuest() {
+        return numberOfGuest;
+    }
+
+    public void setNumberOfGuest(String numberOfGuest) {
+        this.numberOfGuest = numberOfGuest;
+    }
+
     @Override
     public String toString() {
         return "Bride{" +
@@ -91,6 +95,7 @@ public class Bride {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", checkedIn=" + checkedIn +
                 ", howDidYouHear='" + howDidYouHear + '\'' +
+                ", numberOfGuest='" + numberOfGuest + '\'' +
                 '}';
     }
 }

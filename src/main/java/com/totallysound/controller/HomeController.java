@@ -25,7 +25,7 @@ public class HomeController {
 
 
     @RequestMapping("/create")
-    public String create(String email, String name, String weddingDate, String phoneNumber, String howDidYouHear, Model model) {
+    public String create(String email, String name, String weddingDate, String phoneNumber, String howDidYouHear, String numberOfGuest, Model model) {
 
             List<Bride> brideList = brideDao.findByNameContainingIgnoreCase(name);
             List<Bride> brideListEmail = (brideDao.findByEmailEqualsIgnoreCase(email));
@@ -38,6 +38,7 @@ public class HomeController {
                 bride.setWeddingDate(weddingDate);
                 bride.setPhoneNumber(phoneNumber);
                 bride.setHowDidYouHear(howDidYouHear);
+                bride.setNumberOfGuest(numberOfGuest);
                 bride.setCheckedIn(true);
                 brideDao.save(bride);
                 model.addAttribute("bride", bride);
@@ -50,22 +51,12 @@ public class HomeController {
             }
     }
 
-    @RequestMapping("/find-by-email")
-    public String getByEmail(String email, Model model){
-        try {
-            model.addAttribute("brides", brideDao.findByEmailEquals(email));
-            System.out.print(String.valueOf(brideDao.findByEmailEquals(email).getId()));
-            return "result";
-        } catch (NullPointerException e){
 
-        }
-            model.addAttribute("error", "notFound");
-            return brideSearchForm(model);
-    }
 
     @RequestMapping("/checkin")
-    public String getByNameAndEmail(String name, String email, Model model) {
+    public String getByNameAndEmail(String name, String email, String numberOfGuest, Model model) {
         Bride bride = brideDao.findByNameEqualsIgnoreCaseOrEmailEqualsIgnoreCase(name, email);
+
 
         if(bride != null) {
             if (bride.isCheckedIn()) {
@@ -76,6 +67,7 @@ public class HomeController {
                 return brideSearchForm(model);
             } else {
                 bride.setCheckedIn(true);
+                bride.setNumberOfGuest(numberOfGuest);
                 brideDao.save(bride);
                 model.addAttribute("bride", bride);
                 model.addAttribute("email", bride.getEmail());
@@ -90,27 +82,58 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/find-by-name")
+  /*  @RequestMapping("/find-by-name")
     public String getByName(String name, String email, Model model){
             System.out.println(name);
             System.out.println(email);
             model.addAttribute("bride", brideDao.findByNameContainingIgnoreCase(name));
             model.addAttribute("message", "Thank you, You have been checked in. Please enjoy the day. This page will be redirected in 5 seconds.");
         return  "result";
-    }
+    }*/
 
 
-    @RequestMapping("/delete")
+    @GetMapping("/GARBAGE")
     @ResponseBody
-    public String delete(long id){
-        try{
-            Bride bride = new Bride(id);
-            brideDao.delete(bride);
-        } catch (Exception e){
-            return "Error deleting";
-        }
-        return "User deleted";
-    }
+    public String cleanGarbage (){
 
+        int mb = 1024*1024;
+
+        //Getting the runtime reference from system
+        Runtime runtime = Runtime.getRuntime();
+
+        System.out.println("##### Heap utilization statistics [MB] #####");
+
+        //Print used memory
+        System.out.println("Used Memory:"
+                + (runtime.totalMemory() - runtime.freeMemory()) / mb);
+
+        //Print free memory
+        System.out.println("Free Memory:"
+                + runtime.freeMemory() / mb);
+
+        //Print total available memory
+        System.out.println("Total Memory:" + runtime.totalMemory() / mb);
+
+        //Print Maximum available memory
+        System.out.println("Max Memory:" + runtime.maxMemory() / mb);
+
+            System.gc();
+
+
+        //Print used memory
+        System.out.println("Used Memory:"
+                + (runtime.totalMemory() - runtime.freeMemory()) / mb);
+
+        //Print free memory
+        System.out.println("Free Memory:"
+                + runtime.freeMemory() / mb);
+
+        //Print total available memory
+        System.out.println("Total Memory:" + runtime.totalMemory() / mb);
+
+        //Print Maximum available memory
+        System.out.println("Max Memory:" + runtime.maxMemory() / mb);
+        return "Cleaned";
+    }
 
 }
