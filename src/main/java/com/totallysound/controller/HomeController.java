@@ -1,3 +1,4 @@
+/*
 package com.totallysound.controller;
 
 import com.totallysound.entities.Bride;
@@ -88,14 +89,16 @@ public class HomeController {
     }
 
 
-  /*  @RequestMapping("/find-by-name")
+  */
+/*  @RequestMapping("/find-by-name")
     public String getByName(String name, String email, Model model){
             System.out.println(name);
             System.out.println(email);
             model.addAttribute("bride", brideDao.findByNameContainingIgnoreCase(name));
             model.addAttribute("message", "Thank you, You have been checked in. Please enjoy the day. This page will be redirected in 5 seconds.");
         return  "result";
-    }*/
+    }*//*
+
 
 
     @GetMapping("/GARBAGE")
@@ -142,4 +145,4 @@ public class HomeController {
         return "Cleaned";
     }
 
-}
+}*/
