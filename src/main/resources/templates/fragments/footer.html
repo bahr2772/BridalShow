@@ -1,0 +1,36 @@
+<footer th:fragment="foot" style="padding: 0;" class="navbar navbar-bottom footer" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 text-center"><h2 style="padding-top: 0; margin-top: 5px; margin-bottom: 5px;">Check-in App Created and Sponsored by <a href="http://www.yknotstudios.com"><img
+                src="/images/logo.png" width="auto" height="75px"/></a>
+        </h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center" style="margin-top: -10px; ">
+                <h4>If you found this app useful be sure to stop by our booth and say HI.</h4>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#phone').mask('(000) 000-0000');
+
+        $('#userNotFound').fadeIn().delay(5000).fadeOut();
+        $('#userFound').fadeIn().delay(5000).fadeOut();
+        $('#weddingDate').datepicker({
+            format: 'DD, MM dd, yyyy',
+            todayHighlight: true,
+            autoclose: true,
+            todayBtn: true,
+            clearBtn: true
+        });
+
+        function showfield(name) {
+            if (name == 'Other') document.getElementById('div1').style.display = "block";
+            else document.getElementById('div1').style.display = "none";
+        }
+
+        function hidefield() {
+            document.getElementById('div1').style.display = 'none';
+        }
+
+    </script>
+</footer>

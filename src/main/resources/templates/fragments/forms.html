@@ -1,0 +1,92 @@
+<!-- ########################################            Check-in Form         ################################################################################# -->
+
+<form action="#" role="form" th:action="@{/checkin}" th:object="${bride}" method="post" th:fragment="checkinForm" xmlns:th="http://www.w3.org/1999/xhtml">
+    <label th:text="#{label.email}"/>
+    <div class="input-group email" id="email">
+        <input th:placeholder="#{placeholder.email}" class="form-control" name="email" th:field="*{email}" type="email"/><br/>
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-envelope"></span>
+        </div>
+    </div>
+
+    <label th:text="#{label.numberOfGuest}"/>
+    <div class="input-group numberOfGuest" id="numberOfGuest">
+        <input name="guest" class="form-control" th:field="*{numberOfGuest}" type="number"/><br/>
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+        </div>
+    </div>
+    <br/>
+    <button type="submit" value="submit" class="btn btn-info btn-block">Check-in</button>
+</form>
+
+
+
+
+<!-- ########################################            Register Form         ################################################################################# -->
+
+
+
+
+<form action="#" role="form" th:action="@{/create}" th:object="${bride}" method="post" th:fragment="registerForm" xmlns:th="http://www.w3.org/1999/xhtml">
+    <label th:text="#{label.name}"/>
+    <div class="input-group name" id="name">
+        <input th:placeholder="#{placeholder.name}" placeholder="Ann Smith"  name="name" class="form-control" th:field="*{name}" type="text" required="required"/><br/>
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+        </div>
+    </div>
+    <label th:text="#{label.email}"/>
+    <div class="input-group email" id="email">
+        <input th:placeholder="#{placeholder.email}" class="form-control" name="email" th:field="*{email}" type="email"/><br/>
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-envelope"></span>
+        </div>
+    </div>
+    <label th:text="#{label.weddingDate}"/>
+    <div class="input-group date" >
+        <input type="text" class="form-control" name="weddingDate"  id="weddingDate"  th:placeholder="#{placeholder.weddingDate}" th:field="*{weddingDate}" required="required" />
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-th"></span>
+        </div>
+    </div>
+    <label th:text="#{label.phone}"/>
+    <div class="input-group phone" >
+        <input type="tel" class="form-control" name="phone" id="phone"  th:placeholder="#{placeholder.phoneNumber}" th:field="*{phoneNumber}" required="required" />
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-phone"></span>
+        </div>
+    </div>
+    <label th:text="#{label.hearAbout}"/>
+    <div class="input-group">
+        <select id="howDidYouHearAboutUs" name="howDidYouHear" th:field="*{howDidYouHear}" class="selectpicker form-control" data-live-search="true" title="How did you hear about us?"
+                onchange="showfield(this.options[this.selectedIndex].value)">
+
+            <option value="Facebook/Twitter/Social Media">Facebook/Twitter/Social Media</option>
+            <option value="Friend of Family">Friend or Family</option>
+            <option value="Newspaper">Newspaper</option>
+            <option value="Wedding Vendor">Wedding Vendor</option>
+            <option value="Radio">Radio</option>
+            <option value="Other">Other</option>
+        </select>
+        <div id="div1">
+            <input type="text" class="form-control" name="howDidYouHear"  th:field="*{howDidYouHear}"  />
+        </div>
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-bullhorn"></span>
+        </div>
+    </div>
+
+    <label th:text="#{label.numberOfGuest}"/>
+    <div class="input-group numberOfGuest" id="numberOfGuest">
+        <input name="guest" class="form-control" th:field="*{numberOfGuest}" type="number"/><br/>
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <button type="submit" value="search" class="btn btn-info  btn-block">Register</button>
+</form>
+
+

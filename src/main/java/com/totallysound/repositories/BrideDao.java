@@ -17,4 +17,5 @@ public interface BrideDao extends CrudRepository<Bride, Long>{
     public List<Bride> findByNameContainingIgnoreCase(String name);
     public Bride findByNameEqualsIgnoreCaseOrEmailEqualsIgnoreCase(String name, String email);
     public Bride findByEmailEquals(String email);
+    public List<Bride> findByEmailContainingIgnoreCase(String email);
 }

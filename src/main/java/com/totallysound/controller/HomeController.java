@@ -1,4 +1,3 @@
-/*
 package com.totallysound.controller;
 
 import com.totallysound.entities.Bride;
@@ -28,7 +27,7 @@ public class HomeController {
     @RequestMapping("/create")
     public String create(String email, String name, String weddingDate, String phoneNumber, String howDidYouHear, String numberOfGuest, Model model) {
 
-            List<Bride> brideListEmail = (brideDao.findByEmailEqualsIgnoreCase(email));
+            List<Bride> brideListEmail = (brideDao.findByEmailContainingIgnoreCase(email));
 
 
             if (brideListEmail.isEmpty()) {
@@ -89,15 +88,14 @@ public class HomeController {
     }
 
 
-  */
-/*  @RequestMapping("/find-by-name")
+  @RequestMapping("/find-by-name")
     public String getByName(String name, String email, Model model){
             System.out.println(name);
             System.out.println(email);
             model.addAttribute("bride", brideDao.findByNameContainingIgnoreCase(name));
             model.addAttribute("message", "Thank you, You have been checked in. Please enjoy the day. This page will be redirected in 5 seconds.");
         return  "result";
-    }*//*
+    }
 
 
 
@@ -145,4 +143,4 @@ public class HomeController {
         return "Cleaned";
     }
 
-}*/
+}
