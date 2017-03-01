@@ -27,6 +27,8 @@ public class Bride {
 
     private boolean checkedIn = false;
 
+    private boolean preRegistered = false;
+
     private String howDidYouHear;
 
     private String numberOfGuest;
@@ -85,6 +87,10 @@ public class Bride {
         this.numberOfGuest = numberOfGuest;
     }
 
+    public boolean isPreRegistered() { return preRegistered; }
+
+    public void setPreRegistered(boolean preRegistered) { this.preRegistered = preRegistered; }
+
     @Override
     public String toString() {
         return "Bride{" +
@@ -96,6 +102,7 @@ public class Bride {
                 ", checkedIn=" + checkedIn +
                 ", howDidYouHear='" + howDidYouHear + '\'' +
                 ", numberOfGuest='" + numberOfGuest + '\'' +
+                ", preRegistered=" + preRegistered + '\'' +
                 '}';
     }
 }
