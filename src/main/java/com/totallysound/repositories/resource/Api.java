@@ -78,9 +78,9 @@ public class Api {
 
 
     @GetMapping(value = "/report")
-    public List<Bride> getReport(){
+    public List<Bride> getReport() {
         logger.info("reports");
-        return brideDao.findAll();
+        return brideDao.findAllByOrderByNameAsc();
     }
 
 }

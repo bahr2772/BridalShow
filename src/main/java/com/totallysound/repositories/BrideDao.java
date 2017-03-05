@@ -13,7 +13,7 @@ import java.util.List;
 @Transactional
 public interface BrideDao extends CrudRepository<Bride, Long>{
 
-    public List<Bride> findAll();
+    public List<Bride> findAllByOrderByNameAsc();
     public Bride findByEmailEqualsIgnoreCase(String email);
     public List<Bride> findByNameContainingIgnoreCase(String name);
     public Bride findByNameEqualsIgnoreCaseOrEmailEqualsIgnoreCase(String name, String email);
