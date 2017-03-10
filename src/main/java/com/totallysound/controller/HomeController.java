@@ -1,7 +1,10 @@
 package com.totallysound.controller;
 
+
 import com.totallysound.entities.Bride;
-import com.totallysound.repositories.BrideDao;
+import com.totallysound.entities.WebContent;
+import com.totallysound.repositories.BrideDaoImpl;
+import com.totallysound.repositories.WebContentDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,19 +15,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
+@RequestMapping ("/")
 public class HomeController {
 
     @Autowired
-    private BrideDao brideDao;
+    public BrideDaoImpl brideDao;
 
-    @GetMapping(value = {"/", "/index", "/welcome"})
+    @Autowired
+    public WebContentDaoImpl webContentDao;
+
+
+    @GetMapping (value = {"/", "/index", "/welcome"})
     public String brideSearchForm(Model model){
-        model.addAttribute("bride", new Bride());
+        model.addAttribute("webContent", getWebContent());
+        model.addAttribute("bride", new Bride ());
         return "index";
     }
 
+    private List<WebContent> getWebContent() {
+        return webContentDao.findAll();
+    }
 
-    @RequestMapping("/create")
+
+    @RequestMapping ("/create")
     public String create(String email, String name, String weddingDate, String phoneNumber, String howDidYouHear, String numberOfGuest, Model model) {
 
             List<Bride> brideListEmail = (brideDao.findByEmailContainingIgnoreCase(email));

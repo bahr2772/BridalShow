@@ -1,13 +1,14 @@
 package com.totallysound.repositories.resource;
 
 import com.totallysound.entities.Bride;
-import com.totallysound.repositories.BrideDao;
+import com.totallysound.repositories.BrideDaoImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by bahr2772 on 2/14/17.
@@ -16,8 +17,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class Api {
-@Autowired
-    private BrideDao brideDao;
+
+    @Autowired
+    private BrideDaoImpl brideDao;
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -80,7 +83,16 @@ public class Api {
     @GetMapping(value = "/report")
     public List<Bride> getReport() {
         logger.info("reports");
-        return brideDao.findAllByOrderByNameAsc();
+        return brideDao.findAllOrderByNameAsc();
+    }
+
+
+    @GetMapping(value = "/randomBride")
+    public Bride getRandomBride (){
+        List<Bride> brideList = brideDao.findAllOrderByNameAsc ();
+        Random random = new Random ();
+        int index = random.nextInt (brideList.size ());
+        return brideList.get (index);
     }
 
 }

@@ -1,21 +1,15 @@
 package com.totallysound.entities;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
  * Created by bahr2772 on 12/5/16.
  */
 
-@Entity
-@Table(name = "bride")
 public class Bride {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
     private String name;
     @NotNull
     private String email;
@@ -37,11 +31,17 @@ public class Bride {
 
     public Bride(long id){this.id = id; }
 
-    public Bride(String email, String name){
-        this.email = email;
+    public Bride (long id, String name, String email, String weddingDate, String phoneNumber, boolean checkedIn, boolean preRegistered, String howDidYouHear, String numberOfGuest) {
+        this.id = id;
         this.name = name;
+        this.email = email;
+        this.weddingDate = weddingDate;
+        this.phoneNumber = phoneNumber;
+        this.checkedIn = checkedIn;
+        this.preRegistered = preRegistered;
+        this.howDidYouHear = howDidYouHear;
+        this.numberOfGuest = numberOfGuest;
     }
-
 
     public String getWeddingDate() { return weddingDate; }
 
